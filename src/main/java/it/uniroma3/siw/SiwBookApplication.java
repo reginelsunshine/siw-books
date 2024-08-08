@@ -10,5 +10,4 @@ public class SiwBookApplication {
 		SpringApplication.run(SiwBookApplication.class, args);
 
 	}
-
 }
