@@ -18,5 +18,5 @@ public class BookService {
 	public Iterable<Book>findAll(){
 		return bookRepository.findAll();
 	}
-
+}
 
