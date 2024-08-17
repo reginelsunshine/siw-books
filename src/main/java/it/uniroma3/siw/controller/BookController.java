@@ -37,6 +37,6 @@ public class BookController {
 	public String newBook(@ModelAttribute("book") Book book, Model model) {
 		this.bookService.save(book);
 		model.addAttribute("book", book);
-		return "book.html";
+		return "redirect:book/"+book.getId();
 	}
 }
