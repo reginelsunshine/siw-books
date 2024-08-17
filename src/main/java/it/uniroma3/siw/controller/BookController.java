@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Book;
 import it.uniroma3.siw.service.BookService;
@@ -38,5 +39,16 @@ public class BookController {
 		this.bookService.save(book);
 		model.addAttribute("book", book);
 		return "redirect:book/"+book.getId();
+	}
+	
+	@GetMapping("/formSearchBooks")
+	public String formSearchBooks() {
+		return "formSearchBooks.html";
+	}
+	
+	@PostMapping("/searchBooks")
+	public String searchBooks(Model model, @RequestParam Integer year) {
+		model.addAttribute("books", this.bookService.findByYear(year));
+		return "foundBooks.html";
 	}
 }

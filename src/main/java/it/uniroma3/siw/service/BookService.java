@@ -1,6 +1,9 @@
 package it.uniroma3.siw.service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import it.uniroma3.siw.model.Book;
@@ -22,5 +25,12 @@ public class BookService {
 	public Book save(Book book) {
 		return this.bookRepository.save(book);
 	}
+
+	public List<Book> findByYear(Integer year) {
+		// TODO Auto-generated method stub
+		return this.bookRepository.findByYear(year);
+	}
+
+	
 }
 
