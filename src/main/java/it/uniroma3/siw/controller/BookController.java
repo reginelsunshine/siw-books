@@ -16,6 +16,11 @@ import it.uniroma3.siw.service.BookService;
 public class BookController {
 	@Autowired BookService bookService;
 	
+	@GetMapping("/")
+    public String home() {
+        return "index"; // Ritorna il nome della vista "home.html" se usi un template engine come Thymeleaf
+    }
+	
 	@GetMapping("/book/{id}")
 	public String getBook(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("book",this.bookService.findById(id));
