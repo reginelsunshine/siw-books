@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Book;
+import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.BookService;
 
 @Controller
 public class BookController {
 	@Autowired BookService bookService;
 	
+	@Autowired UserRepository userRepository;
+	
 	@GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+		model.addAttribute("users", userRepository.findAll());
         return "index"; // Ritorna il nome della vista "home.html" se usi un template engine come Thymeleaf
     }
 	
