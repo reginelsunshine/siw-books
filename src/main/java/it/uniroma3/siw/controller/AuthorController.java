@@ -50,6 +50,6 @@ public class AuthorController {
 	@GetMapping("/author")
 	public String getAuthor(Model model) {
 		model.addAttribute("author", this.authorRepository.findAll());
-		return "author.html";
+		return "authors.html";
 	}
 }
