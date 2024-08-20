@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Book;
 import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.BookService;
+import it.uniroma3.siw.repository.BookRepository;
+
 
 @Controller
 public class BookController {
 	@Autowired BookService bookService;
+	
+	@Autowired 
+	private BookRepository bookRepository;
 	
 	@Autowired UserRepository userRepository;
 	
@@ -37,10 +42,10 @@ public class BookController {
 		return "books.html";
 	}
 	
-	@GetMapping("/formNewBook")
+	@GetMapping("/admin/formNewBook")
 	public String formNewBook(Model model) {
 		model.addAttribute("book", new Book());
-		return "formNewBook.html";
+		return "admin/formNewBook.html";
 	}
 	
 	@PostMapping("/book")
@@ -60,4 +65,19 @@ public class BookController {
 		model.addAttribute("books", this.bookService.findByYear(year));
 		return "foundBooks.html";
 	}
+	
+	@GetMapping(value="/admin/indexBook")
+	public String indexBook() {
+		return "admin/indexBook.html";
+	}
+	
+	@GetMapping(value="/admin/manageBooks")
+	public String manageBooks(Model model) {
+		model.addAttribute("books", this.bookRepository.findAll());
+		return "admin/manageBooks.html";
+	}
+	
+	
+	
+
 }
