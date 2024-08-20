@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -18,13 +17,21 @@ public class User {
 	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "surname")  // Aggiungi questa annotazione per la nuova colonna
+	private String surname;
+	
+	@Column(name = "email")  // Aggiungi questa annotazione se hai bisogno anche di email
+	private String email;
 
 	public User() {
 	}
 
-	public User(Integer id, String name) {
+	public User(Integer id, String name, String surname, String email) {
 		this.id = id;
 		this.name = name;
+		this.surname = surname;
+		this.email = email;
 	}
 
 	public Integer getId() {
@@ -43,4 +50,19 @@ public class User {
 		this.name = name;
 	}
 
-}   
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+}

@@ -19,7 +19,7 @@ public class BookController {
 	
 	@Autowired UserRepository userRepository;
 	
-	@GetMapping("/")
+	@GetMapping("/books")
     public String home(Model model) {
 		model.addAttribute("users", userRepository.findAll());
         return "index"; // Ritorna il nome della vista "index.html" 
