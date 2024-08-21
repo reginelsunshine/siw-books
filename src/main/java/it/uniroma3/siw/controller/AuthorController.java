@@ -49,7 +49,7 @@ public class AuthorController {
 
 	@GetMapping("/author")
 	public String getAuthor(Model model) {
-		model.addAttribute("author", this.authorRepository.findAll());
+		model.addAttribute("authors", this.authorRepository.findAll());
 		return "authors.html";
 	}
 }
