@@ -60,11 +60,20 @@ public class BookController {
 		return "formSearchBooks.html";
 	}
 	
+	
+	@GetMapping("/foundBooks")                       //metodo per la gestione del redirect per evitare"conferma reinvio modulo cache miss
+	public String showFoundBooks(@RequestParam Integer year, Model model) {
+	    model.addAttribute("books", this.bookService.findByYear(year));
+	    return "foundBooks.html";
+	}
+
 	@PostMapping("/searchBooks")
 	public String searchBooks(Model model, @RequestParam Integer year) {
 		model.addAttribute("books", this.bookService.findByYear(year));
-		return "foundBooks.html";
+		 return "redirect:/foundBooks?year=" + year;                        //redirect per evitare cache miss
 	}
+
+	
 	
 	@GetMapping(value="/admin/indexBook")
 	public String indexBook() {
