@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-<title>Book</title>
-<link rel="stylesheet" href="/css/stile.css" />
+    <title>Book</title>
+    <link rel="stylesheet" href="/css/stile.css" />
 </head>
 <body>
-<div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
-<div th:if="${book}">
-     <div>Anno:<span th:text="'('+${book.year}+')'">2000</span></div>
-     <span><img width="30%" th:src="${book.urlImage}"/></span>
-</div>
-<div th:unless="${book}">Non esiste</div>
-
- 
+    <div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
+    
+    <div th:if="${book}">
+        <div>Anno: <span th:text="'('+${book.year}+')'">2000</span></div>
+        <span><img width="30%" th:src="${book.urlImage}"/></span>
+        
+        <!-- Visualizzazione degli autori specifici per il libro -->
+        <div>Autori:</div>
+        <ul>
+            <li th:each="author : ${book.authors}">
+                <span th:text="${author.name} + ' ' + ${author.surname}">Nome Cognome</span>
+            </li>
+        </ul>
+    </div>
+    
+    <div th:unless="${book}">Non esiste</div>
 </body>
 </html>

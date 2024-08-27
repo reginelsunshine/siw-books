@@ -23,7 +23,7 @@
 	<ul>
 		<li th:each="book : ${books}">
 			<span th:text="${book.title} + ' (' + ${book.year} + ')'">Up! (2000)</span>
-			<!--<a th:href="@{'/admin/formUpdateBook' + '/' + ${book.id}}">Aggiorna</a>-->
+			<a th:href="@{'/admin/formUpdateBook' + '/' + ${book.id}}">Aggiorna</a>
 		</li>
 	</ul>
 </body>

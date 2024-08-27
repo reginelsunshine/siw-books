@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aggiungi Autore al Libro</title>
+    <link rel="stylesheet" href="/css/stile.css" />
+</head>
+<body>
+
+<header>
+		<div th:if="${userDetails}">
+			<span th:text="${userDetails.username}"></span>
+			<a href="/logout">Logout</a>
+		</div>
+		<div th:unless="${user}">
+			<a href="/login">Login</a>
+		</div>
+	</header>
+	
+    <h1>Aggiungi un autore al libro</h1>
+    
+    <div th:if="${book}">
+        <h2 th:text="${book.title}">Titolo del libro</h2>
+        
+        <!-- Form per aggiungere un autore al libro -->
+        <form th:action="@{/admin/addAuthorToBook/{bookId}(bookId=${book.id})}" method="post">
+            <label for="author">Seleziona Autore:</label>
+            <select name="authorId" id="author">
+                <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name} + ' ' + ${author.surname}">
+                    Nome Cognome
+                </option>
+            </select>
+            <button type="submit">Aggiungi Autore</button>
+        </form>
+    </div>
+    
+    <div th:unless="${book}">Libro non trovato</div>
+</body>
+</html>
