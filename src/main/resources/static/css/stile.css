@@ -62,7 +62,7 @@ option {
 }
 
 .book-page .logo img {
-    width: 120px;
+    width: 170px;
 }
 
 .book-page .book-info {
@@ -104,3 +104,49 @@ option {
     font-size: 1.1em;
     color: dimgrey;
 }
+
+/* Stili specifici per la pagina author.html */
+.author-page {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.author-page .logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.author-page .logo img {
+    width: 170px;
+}
+
+.author-page h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+.author-page .author-info {
+    text-align: center;
+}
+
+.author-page .author-info img {
+    width: 150px; /* Dimensione appropriata per l'immagine dell'autore */
+    margin: 10px auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.author-page .author-info span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: dimgrey;
+}
+

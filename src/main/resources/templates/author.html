@@ -15,13 +15,17 @@
         </div>
     </header>
 
-    <div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
-    <h1>Dettagli Autore</h1>
-    <div th:if="${author}">
-        <span th:text="${author.name} + ' ' + ${author.surname}">George Orwell</span>
-        <span th:text="'(' + ${author.dateOfBirth} + ')'">25/07/1903</span>
-        <span><img width="5%" th:src="${author.urlOfPicture}" /></span>
+    <div class="author-page">
+        <div class="logo">
+            <a href="/"><img src="/images/logo-siw.png" alt="Logo"/></a>
+        </div>
+        <h1>Dettagli Autore</h1>
+        <div class="author-info" th:if="${author}">
+            <span th:text="${author.name} + ' ' + ${author.surname}">George Orwell</span>
+            <span th:text="'(' + ${author.dateOfBirth} + ')'">25/07/1903</span>
+            <span><img th:src="${author.urlOfPicture}" alt="Author Picture"/></span>
+        </div>
+        <div th:unless="${author}">Non esiste</div>
     </div>
-    <div th:unless="${author}">Non esiste</div>
 </body>
 </html>
