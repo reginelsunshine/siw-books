@@ -1,0 +1,98 @@
+body { 
+    font-family: "Geneva", sans-serif;
+    color: dimgrey;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 120px;
+    display: block;
+    margin: 0 auto;
+}
+
+.book-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.book-info img {
+    width: 100px; /* Dimensione ridotta dell'immagine del libro */
+    margin: 0 auto 20px;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 200px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.book-info img:hover {
+    transform: scale(1.05);
+}
+
+.book-info .year {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: dimgrey;
+    font-weight: bold; /* Grassetto per la parola "Anno" */
+}
+
+.authors {
+    margin-top: 20px;
+}
+
+.authors h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.authors ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.authors li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: dimgrey;
+}
+
+.authors div {
+    font-weight: bold; /* Grassetto per la parola "Autore" */
+}
+
+a {
+    text-decoration: none; 
+    color: darkgrey;
+}
+
+a:hover { 
+    text-decoration: underline; 
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #aaa;
+    font-size: 0.9em;
+    border-top: 1px solid #eaeaea;
+    padding-top: 20px;
+}

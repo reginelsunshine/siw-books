@@ -14,6 +14,9 @@ import it.uniroma3.siw.model.Author;
 
 public interface AuthorRepository extends CrudRepository<Author, Long> {
 	public boolean existsByNameAndSurname(String name, String surname);	
+	
+	
+
 
 /*query...*/
 	

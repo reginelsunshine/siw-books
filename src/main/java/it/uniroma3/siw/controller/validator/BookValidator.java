@@ -1,4 +1,4 @@
-/*package it.uniroma3.siw.controller.validator;
+package it.uniroma3.siw.controller.validator;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +30,4 @@ public class BookValidator implements Validator {
 		public boolean supports(Class<?> aClass) {
 			return Book.class.equals(aClass);
 	}
-}*/
+}

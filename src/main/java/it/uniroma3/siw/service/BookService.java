@@ -32,7 +32,12 @@ public class BookService {
 		// TODO Auto-generated method stub
 		return this.bookRepository.findByYear(year);
 	}
-
+	
+	@Transactional
+	public boolean existsByTitleAndYear(String titolo, Integer year) {
+		// TODO Auto-generated method stub
+		return this.bookRepository.existsByTitleAndYear(titolo, year);
+	}
     
 }
 
