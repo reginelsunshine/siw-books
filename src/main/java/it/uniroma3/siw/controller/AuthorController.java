@@ -31,15 +31,16 @@ public class AuthorController {
 	
 	@PostMapping("/admin/author")
 	public String newAuthor(@ModelAttribute("author") Author author, Model model) {
-		if (!authorRepository.existsByNameAndSurname(author.getName(), author.getSurname())) {
-			this.authorRepository.save(author); 
-			model.addAttribute("author", author);
-			return "author.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo autore esiste già");
-			return "admin/formNewAuthor.html"; 
-		}
+	    if (!authorRepository.existsByNameAndSurname(author.getName(), author.getSurname())) {
+	        this.authorRepository.save(author); 
+	        model.addAttribute("author", author);
+	        return "author.html";
+	    } else {
+	        model.addAttribute("messaggioErrore", "Questo autore esiste già");
+	        return "admin/formNewAuthor.html"; 
+	    }
 	}
+
 
 	@GetMapping("/author/{id}")
 	public String getAuthor(@PathVariable("id") Long id, Model model) {

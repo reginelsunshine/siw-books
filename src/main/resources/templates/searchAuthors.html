@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ricerca Autori</title>
+    <link rel="stylesheet" href="/css/stile.css"/>
+    <script>
+        function fetchSuggestions(query) {
+            if (query.length < 2) {
+                return;
+            }
+            fetch('/searchAuthors?query=' + query)
+                .then(response => response.json())
+                .then(data => {
+                    let suggestions = document.getElementById('suggestions');
+                    suggestions.innerHTML = '';
+                    data.forEach(author => {
+                        let suggestionItem = document.createElement('div');
+                        suggestionItem.className = 'suggestion-item';
+                        suggestionItem.textContent = author.name + ' ' + author.surname;
+                        suggestionItem.onclick = () => {
+                            document.getElementById('searchInput').value = author.name + ' ' + author.surname;
+                            suggestions.innerHTML = '';
+                        };
+                        suggestions.appendChild(suggestionItem);
+                    });
+                });
+        }
+    </script>
+    <style>
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div th:if="${userDetails}">
+            <span th:text="${userDetails.username}"></span>
+            <a href="/logout">Logout</a>
+        </div>
+        <div th:unless="${userDetails}">
+            <a href="/login">Login</a>
+        </div>
+    </header>
+
+    <div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
+    <h1>Ricerca Autori</h1>
+    <input type="text" id="searchInput" onkeyup="fetchSuggestions(this.value)" placeholder="Cerca autore..."/>
+    <div id="suggestions"></div>
+</body>
+</html>

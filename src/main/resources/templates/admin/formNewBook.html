@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>New Book</title>
-<link rel="stylesheet" href="/css/stile.css"/>
+    <title>New Book</title>
+    <link rel="stylesheet" href="/css/stile.css"/>
 </head>
 <body>
 
 <header>
-		<div th:if="${userDetails}">
-			<span th:text="${userDetails.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${user}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <div th:unless="${user}">
+        <a href="/login">Login</a>
+    </div>
+</header>
 
-  <div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
-  <h1>Aggiungi un libro</h1>
-  <form th:action="@{/book}" method="POST" th:object="${book}">
- <div>
-     Titolo:<span><input required type="text" th:field="${book.title}"/></span>
- </div>
- <div>
-     Anno:<span><input required type="text" th:field="${book.year}"/></span>
- </div>
- <div>
-     URL immagine:<span><input type="url" th:field="${book.urlImage}"/></span>
- </div>
- <div>
-     <span><button type="submit">Conferma</button></span>
- </div>
- </form>
+<div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
+<h1>Aggiungi un libro</h1>
+
+<form th:action="@{/book}" method="POST" th:object="${book}">
+    <div>
+        Titolo:<span><input required type="text" th:field="${book.title}"/></span>
+    </div>
+    <div>
+        Anno:<span><input required type="text" th:field="${book.year}"/></span>
+    </div>
+    <div>
+        URL immagine:<span><input type="url" th:field="${book.urlImage}"/></span>
+    </div>
+
+    <!-- Checkbox per autori esistenti -->
+    <div>
+        Autori:
+        <div th:each="author : ${authors}">
+            <input type="checkbox" th:value="${author.id}" name="authors" 
+                   th:text="${author.name} + ' ' + ${author.surname}" />
+        </div>
+    </div>
+
+    <div>
+        <span><button type="submit">Conferma</button></span>
+    </div>
+</form>
+
 </body>
 </html>

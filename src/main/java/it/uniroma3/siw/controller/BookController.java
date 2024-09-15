@@ -63,15 +63,35 @@ public class BookController {
     @GetMapping("/admin/formNewBook")
     public String formNewBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("authors", authorRepository.findAll());  // Passa tutti gli autori al modello
         return "admin/formNewBook.html";
     }
-	
+
+
     @PostMapping("/book")
-    public String newBook(@ModelAttribute("book") Book book, Model model) {
-        this.bookService.save(book);
+    public String newBook(@ModelAttribute("book") Book book,
+                          @RequestParam(value = "authors", required = false) Set<Long> authorIds,
+                          Model model) {
+        // Gestisci gli autori selezionati dalle checkbox
+        if (authorIds != null) {
+            Set<Author> selectedAuthors = new HashSet<>();
+            for (Long authorId : authorIds) {
+                Author author = authorRepository.findById(authorId).orElse(null);
+                if (author != null) {
+                    selectedAuthors.add(author);
+                }
+            }
+            book.setAuthors(selectedAuthors);
+        }
+
+        // Salva il libro con gli autori selezionati
+        bookService.save(book);
         model.addAttribute("book", book);
-        return "redirect:book/" + book.getId();
+        return "redirect:/book/" + book.getId();
     }
+
+
+
 	
     @GetMapping("/formSearchBooks")
     public String formSearchBooks() {
