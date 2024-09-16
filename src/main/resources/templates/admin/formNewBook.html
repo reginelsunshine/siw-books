@@ -39,18 +39,18 @@
 
 <form th:action="@{/book}" method="POST" th:object="${book}">
     <div>
-        Titolo:<span><input required type="text" th:field="${book.title}"/></span>
+        Titolo: <span><input required type="text" th:field="*{title}"/></span>
     </div>
     <div>
-        Anno:<span><input required type="text" th:field="${book.year}"/></span>
+        Anno: <span><input required type="number" th:field="*{year}"/></span>
     </div>
     <div>
-        URL immagine:<span><input type="url" th:field="${book.urlImage}"/></span>
+        URL immagine: <span><input type="url" th:field="*{urlImage}"/></span>
     </div>
 
     <!-- Barra di ricerca per autori -->
     <div>
-        Autore:<span><input type="text" id="authorSearch" oninput="searchAuthors()" placeholder="Cerca autori..."/></span>
+        Autore: <span><input type="text" id="authorSearch" oninput="searchAuthors()" placeholder="Cerca autori..."/></span>
         <input type="hidden" id="selectedAuthorId" name="authorId"/> <!-- Campo nascosto per ID autore selezionato -->
         <div id="authorSuggestions"></div> <!-- Div per i suggerimenti -->
     </div>

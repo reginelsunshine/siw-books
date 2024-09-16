@@ -7,6 +7,8 @@ import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +29,7 @@ public class Author {
     private String urlOfPicture;
 
     @ManyToMany(mappedBy = "authors")
+    @JsonIgnore
     private Set<Book> books = new HashSet<>();
 
     // Nuovo campo

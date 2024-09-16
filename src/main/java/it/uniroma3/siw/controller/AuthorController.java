@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,8 +58,9 @@ public class AuthorController {
     }
 
     @GetMapping("/api/authors/search")
-    @ResponseBody
-    public List<Author> searchAuthors(@RequestParam("keyword") String keyword) {
-        return authorService.searchAuthors(keyword);
+    public ResponseEntity<List<Author>> searchAuthors(@RequestParam("keyword") String keyword) {
+        List<Author> authors = authorService.searchAuthors(keyword);
+        return ResponseEntity.ok(authors);
     }
+
 }

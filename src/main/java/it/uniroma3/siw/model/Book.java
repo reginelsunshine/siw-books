@@ -3,6 +3,8 @@ package it.uniroma3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +43,7 @@ public class Book {
         joinColumns = @JoinColumn(name = "book_id"),
         inverseJoinColumns = @JoinColumn(name = "author_id")
     )
+    @JsonIgnore
     private Set<Author> authors;
 
     // Getters and Setters
