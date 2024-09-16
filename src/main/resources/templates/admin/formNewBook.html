@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Book</title>
+    <title>Aggiungi un Libro</title>
     <link rel="stylesheet" href="/css/stile.css"/>
+    <script src="/js/searchAuthors.js" defer></script> <!-- Include il file JavaScript -->
+    <style>
+        #authorSuggestions {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: #fff;
+            position: absolute;
+            z-index: 1000;
+        }
+        #authorSuggestions div {
+            padding: 8px;
+            cursor: pointer;
+        }
+        #authorSuggestions div:hover {
+            background-color: #eee;
+        }
+    </style>
 </head>
 <body>
 
@@ -11,7 +29,7 @@
         <span th:text="${userDetails.username}"></span>
         <a href="/logout">Logout</a>
     </div>
-    <div th:unless="${user}">
+    <div th:unless="${userDetails}">
         <a href="/login">Login</a>
     </div>
 </header>
@@ -30,13 +48,11 @@
         URL immagine:<span><input type="url" th:field="${book.urlImage}"/></span>
     </div>
 
-    <!-- Checkbox per autori esistenti -->
+    <!-- Barra di ricerca per autori -->
     <div>
-        Autori:
-        <div th:each="author : ${authors}">
-            <input type="checkbox" th:value="${author.id}" name="authors" 
-                   th:text="${author.name} + ' ' + ${author.surname}" />
-        </div>
+        Autore:<span><input type="text" id="authorSearch" oninput="searchAuthors()" placeholder="Cerca autori..."/></span>
+        <input type="hidden" id="selectedAuthorId" name="authorId"/> <!-- Campo nascosto per ID autore selezionato -->
+        <div id="authorSuggestions"></div> <!-- Div per i suggerimenti -->
     </div>
 
     <div>

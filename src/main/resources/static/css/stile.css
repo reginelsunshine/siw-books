@@ -6,7 +6,7 @@ body {
 
 a { 
     text-decoration: none; 
-    color: darkgrey;
+    color: #9b6464;
 }
 
 a:hover { 
@@ -43,6 +43,91 @@ select {
 
 option {
     padding: 0.5em;
+}
+
+/* Stili specifici per i form di login/registrazione */
+.form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+    text-align: center;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="email"],
+.form-container input[type="url"],
+.form-container input[type="number"] {
+    width: 100%;
+    padding: 0.8em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 0.8em;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(204, 204, 0);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: rgb(180, 180, 0);
+}
+
+/* Riquadri per elenchi */
+.list-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.list-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-container li {
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.list-container li:last-child {
+    border-bottom: none;
 }
 
 /* Stili specifici per la pagina book.html */
@@ -148,4 +233,74 @@ option {
     margin-bottom: 10px;
     font-size: 1.2em;
     color: dimgrey;
+}
+
+.box {
+  background-color: bisque;
+  width: 300px;
+  border: 10px solid green;
+  padding: 20px;
+  margin: 5px;
+}
+
+.paragraph {
+    margin-bottom: 20px; /* Aggiunge spazio tra le frasi */
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.submit-button {
+    width: 10%;
+    padding: 10px;
+    background-color: rgb(204, 204, 0);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: rgb(180, 180, 0);
+}
+
+.register-link {
+    margin-top: 20px;
+}
+
+.register-link a {
+    color: rgb(5, 5, 82);
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }
