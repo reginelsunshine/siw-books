@@ -7,7 +7,7 @@
 </head>
 
 <body>
-     <header>
+    <header>
         <div th:if="${userDetails}">
             <span th:text="${userDetails.username}"></span>
             <a href="/logout">Logout</a>
@@ -21,31 +21,33 @@
     
     <h1>Aggiorna Libro</h1>
 
-    <form th:action="@{/admin/formUpdateBook/{id}(id=${book.id})}" th:object="${book}" method="post"  class="form-container">
-       <div><a href="/" class="button-exit">Annulla</a></div>
-        <label for="title">Titolo:</label>
-        <input type="text" id="title" name="title" th:field="*{title}" /><br />
+<form th:action="@{/admin/formUpdateBook/{id}(id=${book.id})}" th:object="${book}" method="post" enctype="multipart/form-data" class="form-container">
+    <div><a href="/" class="button-exit">Annulla</a></div>
+    
+    <label for="title">Titolo:</label>
+    <input type="text" id="title" name="title" th:field="*{title}" /><br />
 
-        <label for="year">Anno:</label>
-        <input type="number" id="year" name="year" th:field="*{year}" /><br />
+    <label for="year">Anno:</label>
+    <input type="number" id="year" name="year" th:field="*{year}" /><br />
 
-        <label for="urlImage">URL Immagine:</label>
-        <input type="text" id="urlImage" name="urlImage" th:field="*{urlImage}" /><br />
+    <div class="form-group">
+        <label for="imageFile">Fotografia:</label>
+        <input type="file" id="imageFile" name="imageFile" />
+    </div>
 
-        <!-- Aggiungi Autori -->
-        <label>Aggiungi Autori:</label>
-        <div id="authorsContainer">
-            <div class="authorEntry">
-                <input type="text" name="authorNames[]" placeholder="Nome Autore" />
-                <input type="text" name="authorSurnames[]" placeholder="Cognome Autore" />
-            </div>
+    <!-- Aggiungi Autori -->
+    <label>Aggiungi Autori:</label>
+    <div id="authorsContainer">
+        <div class="authorEntry">
+            <input type="text" name="authorNames[]" placeholder="Nome Autore" />
+            <input type="text" name="authorSurnames[]" placeholder="Cognome Autore" />
         </div>
-        <button type="button" onclick="addAuthorEntry()">Aggiungi Altro Autore</button>
-<br></br>
-        <button type="submit">Aggiorna Libro</button>
-    </form>
+    </div>
+    <button type="button" onclick="addAuthorEntry()">Aggiungi Altro Autore</button>
+    <br /><br />
+    <button type="submit">Aggiorna Libro</button>
+</form>
 
- 
 
     <script>
         function addAuthorEntry() {

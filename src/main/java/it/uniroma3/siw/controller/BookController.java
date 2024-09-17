@@ -2,6 +2,10 @@ package it.uniroma3.siw.controller;
 
 import org.springframework.stereotype.Controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,11 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Book;
 import it.uniroma3.siw.model.Author;
 import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.BookService;
+import jakarta.persistence.criteria.Path;
 import jakarta.validation.Valid;
 import it.uniroma3.siw.repository.AuthorRepository;
 import it.uniroma3.siw.repository.BookRepository;
@@ -25,7 +31,9 @@ import it.uniroma3.siw.repository.BookRepository;
 @Controller
 public class BookController {
 
-    @Autowired 
+    private static final String UPLOAD_DIRECTORY = null;
+
+	@Autowired 
     private BookService bookService;
 	
     @Autowired 
@@ -67,24 +75,28 @@ public class BookController {
         return "admin/formNewBook.html";
     }
 
-
     @PostMapping("/book")
     public String newBook(@ModelAttribute("book") Book book,
-                          @RequestParam(value = "authors", required = false) Set<Long> authorIds,
+                          @RequestParam("imageFile") MultipartFile imageFile,
                           Model model) {
-        // Gestisci gli autori selezionati dalle checkbox
-        if (authorIds != null) {
-            Set<Author> selectedAuthors = new HashSet<>();
-            for (Long authorId : authorIds) {
-                Author author = authorRepository.findById(authorId).orElse(null);
-                if (author != null) {
-                    selectedAuthors.add(author);
-                }
+
+        // Verifica se un file è stato caricato
+        if (!imageFile.isEmpty()) {
+            try {
+                // Salva il file nella cartella uploads
+                String uploadsDir = "uploads/";
+                File uploadFile = new File(uploadsDir + imageFile.getOriginalFilename());
+                imageFile.transferTo(uploadFile);
+                
+                // Imposta l'URL dell'immagine nel libro
+                book.setUrlImage("/uploads/" + imageFile.getOriginalFilename());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "error"; // Puoi gestire eventuali errori
             }
-            book.setAuthors(selectedAuthors);
         }
 
-        // Salva il libro con gli autori selezionati
+        // Salva il libro
         bookService.save(book);
         model.addAttribute("book", book);
         return "redirect:/book/" + book.getId();
@@ -127,12 +139,13 @@ public class BookController {
         return "admin/formUpdateBook.html";
     }
 
-    @PostMapping(value = "/admin/formUpdateBook/{id}")
-    public String editingBook(@PathVariable("id") Long id, 
+    @PostMapping("/admin/formUpdateBook/{id}")
+    public String editingBook(@PathVariable("id") Long id,
                               @Valid @ModelAttribute("book") Book book,
-                              BindingResult bindingResult, 
+                              BindingResult bindingResult,
                               @RequestParam(value = "authorNames[]", required = false) String[] authorNames,
                               @RequestParam(value = "authorSurnames[]", required = false) String[] authorSurnames,
+                              @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
                               Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("book", this.bookService.findById(id));
@@ -142,7 +155,35 @@ public class BookController {
         Book originalBook = this.bookService.findById(id);
         originalBook.setTitle(book.getTitle());
         originalBook.setYear(book.getYear());
-        originalBook.setUrlImage(book.getUrlImage());
+
+        // Gestisci l'immagine
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                // Definisci la directory di upload
+                String uploadDir = "C:/myapp/uploads/"; // Usa il percorso corretto
+                File uploadDirFile = new File(uploadDir);
+
+                if (!uploadDirFile.exists()) {
+                    uploadDirFile.mkdirs(); // Crea la directory se non esiste
+                }
+
+                // Crea il file da salvare
+                String fileName = imageFile.getOriginalFilename();
+                File fileToSave = new File(uploadDir + fileName);
+                imageFile.transferTo(fileToSave);
+
+                // Imposta l'URL dell'immagine
+                originalBook.setUrlImage("/uploads/" + fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+                model.addAttribute("messaggioErrore", "Errore nel salvataggio dell'immagine");
+                model.addAttribute("book", originalBook);
+                return "admin/formUpdateBook.html";
+            }
+        } else {
+            // Se non viene caricato un nuovo file, mantieni l'URL esistente
+            originalBook.setUrlImage(book.getUrlImage());
+        }
 
         // Gestisci gli autori
         Set<Author> authors = new HashSet<>();
@@ -169,4 +210,5 @@ public class BookController {
         model.addAttribute("book", originalBook);
         return "redirect:/book/" + id;
     }
+
 }

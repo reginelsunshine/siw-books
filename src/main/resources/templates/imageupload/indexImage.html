@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload</title>
+    <link rel="stylesheet" href="/css/stile.css" />
+</head>
+<body>
+    <h1>Upload Image</h1>
+    <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+        <div>
+            <label for="image">Choose an image:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div>
+        <button type="submit">Upload</button>
+    </form>
+    <p th:if="${msg != null}" th:text="${msg}"></p>
+</body>
+</html>
