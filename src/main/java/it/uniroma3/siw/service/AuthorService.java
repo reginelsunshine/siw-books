@@ -37,4 +37,8 @@ public class AuthorService {
     public boolean authorExists(String name, String surname) {
         return authorRepository.existsByNameAndSurname(name, surname);
     }
+    
+   /* public long countAuthors() {
+        return authorRepository.count();
+    } */
 }

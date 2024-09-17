@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Conteggio degli autori</title>
+    <link rel="stylesheet" href="/css/stile.css"/> <!-- Collegamento al foglio di stile -->
+</head>
+<body>
+
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <div th:unless="${userDetails}">
+        <a href="/login">Login</a>
+    </div>
+</header>
+
+<h1>Numero totale di autori</h1>
+
+<p>Il numero totale di autori è: <span th:text="${authorsCount}"></span></p> <!-- Mostra il conteggio -->
+
+<a href="/">Torna alla home</a>
+
+</body>
+</html>

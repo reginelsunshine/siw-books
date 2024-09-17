@@ -21,4 +21,6 @@ public interface AuthorRepository extends CrudRepository<Author, Long> {
             "LOWER(a.name) LIKE LOWER(CONCAT('%', :searchText, '%')) OR " +
             "LOWER(a.surname) LIKE LOWER(CONCAT('%', :searchText, '%'))")
     List<Author> searchByNameOrSurnameOrBiography(@Param("searchText") String searchText);
+    
+  
 }

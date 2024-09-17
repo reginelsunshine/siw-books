@@ -7,12 +7,12 @@
 </head>
 
 <body>
-    <header>
+     <header>
         <div th:if="${userDetails}">
             <span th:text="${userDetails.username}"></span>
             <a href="/logout">Logout</a>
         </div>
-        <div th:unless="${user}">
+        <div th:unless="${userDetails}">
             <a href="/login">Login</a>
         </div>
     </header>
@@ -21,7 +21,8 @@
     
     <h1>Aggiorna Libro</h1>
 
-    <form th:action="@{/admin/formUpdateBook/{id}(id=${book.id})}" th:object="${book}" method="post">
+    <form th:action="@{/admin/formUpdateBook/{id}(id=${book.id})}" th:object="${book}" method="post"  class="form-container">
+       <div><a href="/" class="button-exit">Annulla</a></div>
         <label for="title">Titolo:</label>
         <input type="text" id="title" name="title" th:field="*{title}" /><br />
 
@@ -39,12 +40,12 @@
                 <input type="text" name="authorSurnames[]" placeholder="Cognome Autore" />
             </div>
         </div>
-        <button type="button" onclick="addAuthorEntry()">Aggiungi Altro Autore</button><br />
-
+        <button type="button" onclick="addAuthorEntry()">Aggiungi Altro Autore</button>
+<br></br>
         <button type="submit">Aggiorna Libro</button>
     </form>
 
-    <a href="/" class="button">Annulla</a>
+ 
 
     <script>
         function addAuthorEntry() {
@@ -56,6 +57,7 @@
             container.appendChild(newEntry);
         }
     </script>
+    
 </body>
 
 </html>

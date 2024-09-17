@@ -4,23 +4,7 @@
     <title>Aggiungi un Libro</title>
     <link rel="stylesheet" href="/css/stile.css"/>
     <script src="/js/searchAuthors.js" defer></script> <!-- Include il file JavaScript -->
-    <style>
-        #authorSuggestions {
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            background-color: #fff;
-            position: absolute;
-            z-index: 1000;
-        }
-        #authorSuggestions div {
-            padding: 8px;
-            cursor: pointer;
-        }
-        #authorSuggestions div:hover {
-            background-color: #eee;
-        }
-    </style>
+ 
 </head>
 <body>
 
@@ -37,7 +21,7 @@
 <div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
 <h1>Aggiungi un libro</h1>
 
-<form th:action="@{/book}" method="POST" th:object="${book}">
+<form th:action="@{/book}" method="POST" th:object="${book}" class="form-container">
     <div>
         Titolo: <span><input required type="text" th:field="*{title}"/></span>
     </div>
@@ -56,9 +40,10 @@
     </div>
 
     <div>
-        <span><button type="submit">Conferma</button></span>
+        <span><button type="submit" class="submit-button">Conferma</button></span>
     </div>
 </form>
+
 
 </body>
 </html>

@@ -62,5 +62,11 @@ public class AuthorController {
         List<Author> authors = authorService.searchAuthors(keyword);
         return ResponseEntity.ok(authors);
     }
-
+    
+   /* @GetMapping("/authorCount")
+    public String showAuthorCount(Model model) {
+        long count = authorService.countAuthors();
+        model.addAttribute("authorsCount", count);
+        return "authorCountView";  // Il nome della vista dove mostri il conteggio
+    } */
 }

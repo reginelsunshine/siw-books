@@ -2,50 +2,55 @@
 <html>
 
 <head>
-	<title>
-		New Author
-	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+    <title>New Author</title>
+    <link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
-	<header>
-		<div th:if="${userDetails}">
-			<span th:text="${userDetails.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${user}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
+    <header>
+        <div th:if="${userDetails}">
+            <span th:text="${userDetails.username}"></span>
+            <a href="/logout">Logout</a>
+        </div>
+        <div th:unless="${userDetails}">
+            <a href="/login">Login</a>
+        </div>
+    </header>
 
-	<div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
-	<h1>Aggiungi un autore</h1>
-	<form th:action="@{/admin/author}" method="POST" th:object="${author}">
-		<div>
-			<span th:text="${messaggioErrore}">Errore</span>
-		</div>
-		
-		<div>
-			<label>Nome:</label> <span><input required type="text" th:field="${author.name}" /></span>
-		</div>
+    <div><a href="/"><img src="/images/logo-siw.png" width="20%"/></a></div>
+    <h1>Aggiungi un autore</h1>
 
-		<div>
-			<label>Cognome:</label> <span><input required type="text" th:field="${author.surname}" /></span>
-		</div>
+    <div class="form-container">
+        <form th:action="@{/admin/author}" method="POST" th:object="${author}">
+            <div class="form-group">
+                <span th:text="${messaggioErrore}" class="error-message">Errore</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input required type="text" id="name" th:field="${author.name}" />
+            </div>
 
-		<div>
-			<label>Data di nascita:</label> <span><input type="date" th:field="${author.dateOfBirth}" /></span>
-		</div>
+            <div class="form-group">
+                <label for="surname">Cognome:</label>
+                <input required type="text" id="surname" th:field="${author.surname}" />
+            </div>
 
-		<div>
-			<label>Fotografia (url):</label> <span><input type="text" th:field="${author.urlOfPicture}" /></span>
-		</div>
-		
-		<div>
-			<span><button type="submit">Conferma</button></span>
-		</div>
-	</form>
+            <div class="form-group">
+                <label for="dateOfBirth">Data di nascita:</label>
+                <input type="date" id="dateOfBirth" th:field="${author.dateOfBirth}" />
+            </div>
+
+            <div class="form-group">
+                <label for="urlOfPicture">Fotografia (url):</label>
+                <input type="text" id="urlOfPicture" th:field="${author.urlOfPicture}" />
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="submit-button">Conferma</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
